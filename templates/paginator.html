@@ -1,0 +1,71 @@
+
+<div class="page-item">
+    {% if items.has_previous %}
+    <!-- Показывам кнопку со ссылкой, если есть предыдущая страница -->
+    <a href="?page={{ items.previous_page_number }}">&lt;&nbsp; Вперед</a>
+    {% else %}
+    <!-- Показываем неактивную кнопку, если предыдущей страницы нет -->
+    <span>&lt;&nbsp; Вперед</span>
+    {% endif %}
+
+    <!-- Прибавляем к номеру текущей страницы -4 (т.е. отнимаем 4) -->
+    {% if items.number|add:'-4' > 0 %}
+    <!-- Если до текущей страницы есть больше 4 страниц, показываем многоточие -->
+    <span class="ellipsis">...</span>
+    {% endif %}
+
+    {% if items.number|add:'-3' > 0 %}
+    <!-- Если до текущей страницы есть ещё три страницы -->
+    <a href="?page={{ items.number|add:'-3' }}">
+        {{ items.number|add:'-3' }}
+    </a>
+    {% endif %}
+    {% if items.number|add:'-2' > 0 %}
+    <!-- Если до текущей страницы есть ещё две страницы -->
+    <a href="?page={{ items.number|add:'-2' }}">
+        {{ items.number|add:'-2' }}
+    </a>
+    {% endif %}
+    {% if items.number|add:'-1' > 0 %}
+    <!-- Если до текущей страницы есть ещё одна страница -->
+    <a href="?page={{ items.number|add:'-1' }}">
+        {{ items.number|add:'-1' }}
+    </a>
+    {% endif %}
+
+    <!-- Номер текущей страницы -->
+    <span>{{ items.number }}</span>
+
+    {% if items.number|add:'1' <= paginator.num_pages %}
+    <!-- Если после текущей страницы есть ещё одна страница -->
+    <a href="?page={{ items.number|add:'1' }}">
+        {{ items.number|add:'1' }}
+    </a>
+    {% endif %}
+    {% if paginator.page.number|add:'2' <= paginator.num_pages %}
+    <!-- Если после текущей страницы есть ещё две страницы -->
+    <a href="?page={{ items.number|add:'2' }}">
+        {{ items.number|add:'2' }}
+    </a>
+    {% endif %}
+    {% if items.number|add:'3' <= paginator.num_pages %}
+    <!-- Если после текущей страницы есть ещё три страницы -->
+    <a href="?page={{ items.number|add:'3' }}">
+        {{ items.number|add:'3' }}
+    </a>
+    {% endif %}
+
+    {% if items.number|add:'4' <= paginator.num_pages %}
+    <!-- Если после текущей страницы есть ещё четыре страницы -->
+    <span class="ellipsis">...</span>
+    {% endif %}
+
+    {% if items.has_next %}
+    <!-- Показывам кнопку со ссылкой, если есть следующая страница -->
+    <a href="?page={{ items.next_page_number }">
+        Назад &nbsp;&gt;</a>
+    {% else %}
+    <!-- Если нет следующей страницы -->
+    <span>Назад &nbsp;&gt;</span>
+    {% endif %}
+</div>

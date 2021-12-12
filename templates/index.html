@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% block title %} Запрос на загрузку {% endblock %}
+{% block content %}
+<div class="container">
+  <h1 style="text-align: center">Демонстрация данных</h1>
+  <br>
+  <h3 style="text-align: center"> Колличество данных в базе равно {{ count_list }}</h3>
+  <br>
+  <!-- Вывод ленты записей -->
+  <div style="display: flex; justify-content: center;">
+    <button style="align-content: center; border-radius: 5px;">
+        <a href="{% url 'download' %}" class='btn btn-lg'>Сделать запрос данных </a>
+    </button>
+  </div><br>
+  <table class="table_sort">
+    <thead style="text-align: center;">
+      <tr>
+        <th>Имя</th>
+        <th>Тема поста</th>
+        <th>Текст поста</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for post in page %}
+      <tr>
+        <td>{{ post.name }}</td>
+        <td>{{ post.topic }}</td>
+        <td>{{ post.text }}</td>
+      </tr>
+       {% endfor %}
+      </tbody>
+  </table>
+</div>
+        <!-- Вывод паджинатора -->
+   {% if page.has_other_pages %}
+     {% include "paginator.html" with items=page paginator=paginator %}
+   {% endif %}
+{% endblock %}
